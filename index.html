@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rehab360 Compliance - User Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Rehab360 Compliance System</h1>
+            <p class="subtitle">User Profile Management</p>
+        </header>
+
+        <main>
+            <form id="userProfileForm" class="profile-form">
+                <section class="form-section">
+                    <h2>Personal Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                        <span class="error-message" id="firstName-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                        <span class="error-message" id="lastName-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="555-555-5555" required>
+                        <span class="error-message" id="phone-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                        <span class="error-message" id="dateOfBirth-error"></span>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h2>Professional Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="employeeId">Employee ID <span class="required">*</span></label>
+                        <input type="text" id="employeeId" name="employeeId" required>
+                        <span class="error-message" id="employeeId-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department <span class="required">*</span></label>
+                        <select id="department" name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="physical-therapy">Physical Therapy</option>
+                            <option value="occupational-therapy">Occupational Therapy</option>
+                            <option value="speech-therapy">Speech Therapy</option>
+                            <option value="nursing">Nursing</option>
+                            <option value="administration">Administration</option>
+                            <option value="compliance">Compliance</option>
+                        </select>
+                        <span class="error-message" id="department-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Position/Title <span class="required">*</span></label>
+                        <input type="text" id="position" name="position" required>
+                        <span class="error-message" id="position-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="licenseNumber">License Number</label>
+                        <input type="text" id="licenseNumber" name="licenseNumber">
+                        <span class="error-message" id="licenseNumber-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="licenseExpiration">License Expiration Date</label>
+                        <input type="date" id="licenseExpiration" name="licenseExpiration">
+                        <span class="error-message" id="licenseExpiration-error"></span>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h2>Compliance & Training</h2>
+                    
+                    <div class="form-group">
+                        <label for="hipaaCertification">HIPAA Certification <span class="required">*</span></label>
+                        <select id="hipaaCertification" name="hipaaCertification" required>
+                            <option value="">Select Status</option>
+                            <option value="current">Current</option>
+                            <option value="expired">Expired</option>
+                            <option value="not-completed">Not Completed</option>
+                        </select>
+                        <span class="error-message" id="hipaaCertification-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hipaaCertDate">HIPAA Certification Date</label>
+                        <input type="date" id="hipaaCertDate" name="hipaaCertDate">
+                        <span class="error-message" id="hipaaCertDate-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="backgroundCheck">Background Check Status <span class="required">*</span></label>
+                        <select id="backgroundCheck" name="backgroundCheck" required>
+                            <option value="">Select Status</option>
+                            <option value="cleared">Cleared</option>
+                            <option value="pending">Pending</option>
+                            <option value="required">Required</option>
+                        </select>
+                        <span class="error-message" id="backgroundCheck-error"></span>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="agreedToPolicy" name="agreedToPolicy" required>
+                        <label for="agreedToPolicy">I agree to comply with all Rehab360 policies and regulations <span class="required">*</span></label>
+                        <span class="error-message" id="agreedToPolicy-error"></span>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h2>Emergency Contact</h2>
+                    
+                    <div class="form-group">
+                        <label for="emergencyName">Emergency Contact Name <span class="required">*</span></label>
+                        <input type="text" id="emergencyName" name="emergencyName" required>
+                        <span class="error-message" id="emergencyName-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emergencyPhone">Emergency Contact Phone <span class="required">*</span></label>
+                        <input type="tel" id="emergencyPhone" name="emergencyPhone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="555-555-5555" required>
+                        <span class="error-message" id="emergencyPhone-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emergencyRelationship">Relationship <span class="required">*</span></label>
+                        <input type="text" id="emergencyRelationship" name="emergencyRelationship" required>
+                        <span class="error-message" id="emergencyRelationship-error"></span>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Profile</button>
+                    <button type="reset" class="btn btn-secondary">Reset Form</button>
+                </div>
+
+                <div id="successMessage" class="success-message hidden">
+                    Profile saved successfully!
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Rehab360 Compliance System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
