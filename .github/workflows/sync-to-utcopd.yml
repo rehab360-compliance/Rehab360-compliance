@@ -1,0 +1,52 @@
+name: Sync outpatient curriculum to UTCOPD
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/outpatient-treatment-curriculum/**'
+  workflow_dispatch:
+
+jobs:
+  sync-to-utcopd:
+    name: Publish outpatient curriculum to Akgosil3/UTCOPD
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare standalone curriculum tree
+        run: |
+          # Copy the curriculum subtree into a temporary workspace
+          mkdir -p /tmp/utcopd-export
+          cp -r docs/outpatient-treatment-curriculum/. /tmp/utcopd-export/
+
+      - name: Push to Akgosil3/UTCOPD
+        env:
+          UTCOPD_PUSH_TOKEN: ${{ secrets.UTCOPD_PUSH_TOKEN }}
+        run: |
+          cd /tmp/utcopd-export
+
+          git init
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add .
+          git commit -m "Sync from rehab360-compliance/Rehab360-compliance@${GITHUB_SHA}
+
+Source: https://github.com/rehab360-compliance/Rehab360-compliance/commit/${GITHUB_SHA}
+
+NOTE: This repository is a read-only mirror of docs/outpatient-treatment-curriculum/
+in the source repository. All changes must be made upstream; direct commits here
+will be overwritten on the next sync."
+
+          git remote add utcopd \
+            "https://x-access-token:${UTCOPD_PUSH_TOKEN}@github.com/Akgosil3/UTCOPD.git"
+
+          # Force-push so the UTCOPD repo always reflects the canonical source
+          git push --force utcopd HEAD:main

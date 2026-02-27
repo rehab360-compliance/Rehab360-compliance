@@ -1,5 +1,7 @@
 # Outpatient Treatment Curriculum – Universal Treatment Curriculum (UTC)
 
+> **Canonical mirror:** This content is automatically published to **[Akgosil3/UTCOPD](https://github.com/Akgosil3/UTCOPD)** on every merge to `main`. See the [sync workflow](../../.github/workflows/sync-to-utcopd.yml) and setup instructions in the [root README](../../README.md#utcopd-mirror-repository).
+
 This section contains the full documentation set for Rehab360's outpatient Substance Use Disorder (SUD) treatment programme, built around the **Universal Treatment Curriculum (UTC)**. The structure mirrors the accreditation framework used across Rehab360 compliance programmes, aligned to SAQA and HWSETA requirements.
 
 ## Repository Structure
