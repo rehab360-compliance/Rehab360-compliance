@@ -1,4 +1,4 @@
-name: Sync outpatient curriculum to UTCOPD
+name: Sync to Akgosil3/UTCOPD
 
 on:
   push:
@@ -6,11 +6,12 @@ on:
       - main
     paths:
       - 'docs/outpatient-treatment-curriculum/**'
+      - 'platform/**'
   workflow_dispatch:
 
 jobs:
   sync-to-utcopd:
-    name: Publish outpatient curriculum to Akgosil3/UTCOPD
+    name: Publish curriculum + platform to Akgosil3/UTCOPD
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -20,11 +21,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Prepare standalone curriculum tree
+      - name: Prepare standalone export tree
         run: |
-          # Copy the curriculum subtree into a temporary workspace
-          mkdir -p /tmp/utcopd-export
-          cp -r docs/outpatient-treatment-curriculum/. /tmp/utcopd-export/
+          mkdir -p /tmp/utcopd-export/docs
+          mkdir -p /tmp/utcopd-export/platform
+
+          # UTC outpatient curriculum
+          cp -r docs/outpatient-treatment-curriculum/. /tmp/utcopd-export/docs/
+
+          # Therapy platform source (exclude build artifacts and dependencies)
+          rsync -a --exclude='node_modules/' --exclude='dist/' platform/. /tmp/utcopd-export/platform/
+
+          # Top-level README
+          cp README.md /tmp/utcopd-export/README.md
 
       - name: Push to Akgosil3/UTCOPD
         env:
@@ -41,12 +50,12 @@ jobs:
 
 Source: https://github.com/rehab360-compliance/Rehab360-compliance/commit/${GITHUB_SHA}
 
-NOTE: This repository is a read-only mirror of docs/outpatient-treatment-curriculum/
-in the source repository. All changes must be made upstream; direct commits here
-will be overwritten on the next sync."
+NOTE: This repository is a read-only mirror of the UTC curriculum and therapy
+platform from the source repository. All changes must be made upstream;
+direct commits here will be overwritten on the next sync."
 
           git remote add utcopd \
             "https://x-access-token:${UTCOPD_PUSH_TOKEN}@github.com/Akgosil3/UTCOPD.git"
 
-          # Force-push so the UTCOPD repo always reflects the canonical source
+          # Force-push so UTCOPD always reflects the canonical source
           git push --force utcopd HEAD:main
