@@ -81,7 +81,82 @@ GitHub Pages deployment is automated via GitHub Actions.
 
 The deployment workflow is defined in `.github/workflows/deploy-platform.yml`.
 
-### 4. Manual Static Hosting
+### 4. Docker
+
+Deploy using Docker for containerized deployment on any platform.
+
+#### Build and Run Locally
+
+```bash
+cd platform
+
+# Build the Docker image
+docker build -t rehab360-platform .
+
+# Run the container
+docker run -d -p 8080:80 --name rehab360 rehab360-platform
+
+# Visit http://localhost:8080
+```
+
+#### Using Docker Compose
+
+```bash
+cd platform
+docker-compose up -d
+
+# Visit http://localhost:8080
+
+# View logs
+docker-compose logs -f
+
+# Stop
+docker-compose down
+```
+
+#### Deploy to Cloud
+
+**AWS ECS/Fargate**
+```bash
+# Build and tag
+docker build -t rehab360-platform .
+docker tag rehab360-platform:latest <account-id>.dkr.ecr.<region>.amazonaws.com/rehab360:latest
+
+# Push to ECR
+aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <account-id>.dkr.ecr.<region>.amazonaws.com
+docker push <account-id>.dkr.ecr.<region>.amazonaws.com/rehab360:latest
+
+# Deploy via ECS
+```
+
+**Google Cloud Run**
+```bash
+# Build and push
+gcloud builds submit --tag gcr.io/<project-id>/rehab360-platform
+
+# Deploy
+gcloud run deploy rehab360-platform \
+  --image gcr.io/<project-id>/rehab360-platform \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated
+```
+
+**Azure Container Instances**
+```bash
+# Build and push to ACR
+az acr build --registry <registry-name> --image rehab360-platform:latest .
+
+# Deploy
+az container create \
+  --resource-group <resource-group> \
+  --name rehab360-platform \
+  --image <registry-name>.azurecr.io/rehab360-platform:latest \
+  --dns-name-label rehab360 \
+  --ports 80
+```
+
+### 5. Manual Static Hosting
 
 You can deploy the `dist/` folder to any static hosting provider:
 
