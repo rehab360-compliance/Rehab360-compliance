@@ -8,7 +8,6 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
-    minify: 'esbuild',
     target: 'es2020',
     rollupOptions: {
       output: {
