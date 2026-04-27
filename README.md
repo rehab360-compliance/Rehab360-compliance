@@ -30,6 +30,7 @@ The [`platform/`](platform/) directory contains the Rehab360 therapy platform �
 | Therapist directory with filters | ✅ Phase 2 |
 | Real-time secure messaging / chat | ✅ Phase 2 |
 | Video session integration | 🔜 Phase 3 |
+| **Production deployment ready** | ✅ **Ready** |
 
 ### Quick start
 
@@ -40,6 +41,21 @@ npm run dev   # http://localhost:5173
 ```
 
 Tech stack: **React 19 · TypeScript · Vite · TanStack Router · lucide-react**
+
+### Deployment
+
+**Ready for production!** Multiple deployment options available:
+
+- **[Quick Start Guide](platform/QUICK-START-DEPLOY.md)** - Deploy in under 5 minutes
+- **[Full Deployment Guide](platform/DEPLOYMENT.md)** - Comprehensive deployment documentation
+- **[Production Checklist](platform/PRODUCTION-CHECKLIST.md)** - Pre-deployment verification
+
+**Supported platforms:**
+- ⚡ Vercel (recommended)
+- 🚀 Netlify
+- 📄 GitHub Pages (automated via Actions)
+- 🐳 Docker / Docker Compose
+- ☁️ AWS, Google Cloud, Azure
 
 ## UTCOPD Mirror Repository
 
